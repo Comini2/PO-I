@@ -1,0 +1,122 @@
+body {
+      font: 20px Montserrat, sans-serif;
+      line-height: 1.8;
+      margin-bottom: 60px;
+      color: #4d4d4d;
+  }
+
+html{
+  position: relative;
+  min-height: 100%;
+}
+.footer{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #c3c3c3;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.container .text-muted {
+  margin: 17px 0 0 0;
+  font-size: 18px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+.arrow{
+  float: right;
+}
+
+h6{
+  color: red;
+  display: none;
+}
+
+p {
+  font-size: 18px;
+}
+
+.navbar{
+  border-radius: 0px;
+  margin-bottom: 0px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.navbar-header, li > a{
+  font-family: 'Oswald', sans-serif;
+ }
+
+ .navbar-header{
+  padding-left: 50px;
+  padding-right: 100px;
+ }
+
+ .navbar-header > a{
+  font-size: 26px;
+ }
+
+.container-fluid {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+label{
+  font-weight: 100;
+}
+
+label[for="funcao"]{
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+ #funcao{
+  width: 90%;
+ }
+
+.border-bot{
+  border-bottom: 1px solid #999999;
+}
+
+input[type="text"]{
+  border: none;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+input[type="text"]:focus{
+  outline: none;
+  border-color: #0095ff;
+  box-shadow: 0 4px 2px -2px rgba(0,149,255,0.5);
+}
+
+#calcula{
+  margin-top: 15px;
+  float: right;
+  margin-right: 4%;
+}
+  
+.bg-1 {
+  background-color: #1abc9c;
+  color: #ffffff;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.vals{
+  height: 30px;
+  margin-top: 5px;
+  width: 50px;
+}
+
+label[for="passo"],label[for="erro"]{
+  width: 70%;
+}
+
+#passo, #erro{
+  width: 60%;
+}
