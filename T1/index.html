@@ -22,10 +22,10 @@
   	<div class="container">
   		<div class="row">
   			<div class="col-sm-3" id="ordem">
-  				<label for="tipo">Tipo: </label>
+  				<label for="tipo">Função: </label>
   				<select id="tipo">
-					<option value="max">max</option>
 					<option value="min">min</option>
+					<option value="max">max</option>
 	  			</select><br>
   				<label for="n">Nº de varáveis:</label>
 		  		<input type="text" id="n" class="vals" value="2"><br>
@@ -33,14 +33,13 @@
 		  		<input type="text" id="nr" class="vals" value="2">
   			</div>
   			<div class="col-sm-9">
-  				<div>
-	  				<label>Função: </label>
-  					<input type="text" class="vals" name="f0">X<sub>1</sub> + <input type="text" class="vals" name="f1">X<sub>2</sub>
+  				<div id="funcao">
+  					z = <input type="text" class="vals" name="f0">x<sub>1</sub> + <input type="text" class="vals" name="f1">x<sub>2</sub>
 	  			</div>
-	  			<div>
+	  			<div id="restricoes">
 	  				<label>Restrições: </label>
 	  				<div>
-	  					<input type="text" class="vals" name="a00">X<sub>1</sub> + <input type="text" class="vals" name="a01">X<sub>2</sub>
+	  					<input type="text" class="vals" name="a00">x<sub>1</sub> + <input type="text" class="vals" name="a01">x<sub>2</sub>
 	  					<select name="s0">
 	  						<option value="le">&le;</option>
 	  						<option value="equal">=</option>
@@ -49,18 +48,20 @@
 	  					<input type="text" class="vals" name="b0">
 	  				</div>
 	  				<div>
-	  					<input type="text" class="vals" name="a10">X<sub>1</sub> + <input type="text" class="vals" name="a11">X<sub>2</sub>
+	  					<input type="text" class="vals" name="a10">x<sub>1</sub> + <input type="text" class="vals" name="a11">x<sub>2</sub>
 	  					<select name="s1">
-	  						<option>&le;</option>
-	  						<option>=</option>
-	  						<option>&ge;</option>
+	  						<option value="le">&le;</option>
+	  						<option value="equal">=</option>
+	  						<option value="ge">&ge;</option>
 	  					</select>
-	  					<input type="text" class="vals" id="b1">
+	  					<input type="text" class="vals" name="b1">
 	  				</div>
 	  			</div>
 		  		
   			</div>	
   		</div>
+
+  		<button id ="calcula">Calcular</button>
   		
   	</div>
 
