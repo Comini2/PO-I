@@ -70,15 +70,6 @@ label{
   font-weight: 100;
 }
 
-label[for="funcao"]{
-  width: 100%;
-  margin-bottom: 15px;
-}
-
- #funcao{
-  width: 90%;
- }
-
 .border-bot{
   border-bottom: 1px solid #999999;
 }
@@ -111,12 +102,10 @@ input[type="text"]:focus{
   height: 30px;
   margin-top: 5px;
   width: 50px;
+  text-align: right;
 }
 
-label[for="passo"],label[for="erro"]{
-  width: 70%;
-}
-
-#passo, #erro{
-  width: 60%;
+td, th{
+  width: 50px;
+  text-align: center;
 }

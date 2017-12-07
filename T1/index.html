@@ -20,12 +20,15 @@
   	</div>
 
   	<div class="container">
+      <div class="row border-bot">
+          <h3>Problema:</h3>          
+      </div>
   		<div class="row">
   			<div class="col-sm-3" id="ordem">
   				<label for="tipo">Função: </label>
   				<select id="tipo">
-					<option value="min">min</option>
-					<option value="max">max</option>
+  					<option value="min">Minimização</option>
+  					<option value="max">Maximização</option>
 	  			</select><br>
   				<label for="n">Nº de varáveis:</label>
 		  		<input type="text" id="n" class="vals" value="2"><br>
@@ -34,12 +37,12 @@
   			</div>
   			<div class="col-sm-9">
   				<div id="funcao">
-  					z = <input type="text" class="vals" name="f0">x<sub>1</sub> + <input type="text" class="vals" name="f1">x<sub>2</sub>
+  					z = <input type="text" class="vals" name="f0"> .x<sub>1</sub> + <input type="text" class="vals" name="f1"> .x<sub>2</sub>
 	  			</div>
 	  			<div id="restricoes">
-	  				<label>Restrições: </label>
+	  				<label>Sujeito a: </label>
 	  				<div>
-	  					<input type="text" class="vals" name="a00">x<sub>1</sub> + <input type="text" class="vals" name="a01">x<sub>2</sub>
+	  					<input type="text" class="vals" name="a00"> .x<sub>1</sub> + <input type="text" class="vals" name="a01"> .x<sub>2</sub>
 	  					<select name="s0">
 	  						<option value="le">&le;</option>
 	  						<option value="equal">=</option>
@@ -48,7 +51,7 @@
 	  					<input type="text" class="vals" name="b0">
 	  				</div>
 	  				<div>
-	  					<input type="text" class="vals" name="a10">x<sub>1</sub> + <input type="text" class="vals" name="a11">x<sub>2</sub>
+	  					<input type="text" class="vals" name="a10"> .x<sub>1</sub> + <input type="text" class="vals" name="a11"> .x<sub>2</sub>
 	  					<select name="s1">
 	  						<option value="le">&le;</option>
 	  						<option value="equal">=</option>
@@ -57,11 +60,12 @@
 	  					<input type="text" class="vals" name="b1">
 	  				</div>
 	  			</div>
-		  		
   			</div>	
+        <button id ="calcula" class="btn btn-primary">Calcular</button>
   		</div>
 
-  		<button id ="calcula">Calcular</button>
+      <div class="row" id="problema"></div>
+  		<div class="row" id="iteracoes"></div>
   		
   	</div>
 

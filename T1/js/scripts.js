@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	var a = [], b = [], c = [], cr = [], base = [], n = 2, nr = 2, nfp, maiorCusto = 0;
 
+	$("input").val(0);
+	$("#n").val(2);
+	$("#nr").val(2);
+
 	$("#n").change(function(){
 		n = parseInt($("#n").val());
 
@@ -18,9 +22,9 @@ $(document).ready(function() {
 
 		for(i = 0; i<n; i++){
 			if(i < n-1)
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">x<sub>' + (i+1) + '</sub> +');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub> +');
 			else
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">x<sub>' + (i+1) + '</sub>');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub>');
 		}
 	});
 
@@ -43,9 +47,9 @@ $(document).ready(function() {
 			var $div = $("<div></div>");
 			for(var j = 0; j<n; j++){
 				if(j < n - 1)
-					$div.append('<input type="text" class="vals" name="a'+ i + j +'">x<sub>'+ (j+1) +'</sub> +');
+					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> +');
 				else
-					$div.append('<input type="text" class="vals" name="a' + i + j +'">x<sub>'+ (j+1) +'</sub>');
+					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub>');
 				console.log("ue");
 			}
 
@@ -58,6 +62,9 @@ $(document).ready(function() {
 
 	$("#calcula").click(function(){
 		
+		$("#iteracoes").empty();
+		$("#problema").empty();	
+
 		nfp = n;
 		nr = parseInt($("#nr").val());
 
@@ -103,6 +110,19 @@ $(document).ready(function() {
 
 		for(var i=0; i<c.length; i++)
 			cr[i] = c[i];
+
+		var funString = "";
+
+		funString += $("#tipo").val() == "min" ? "min z=" : "max -z= ";
+
+		for(var i = 0; i<nfp; i++){
+			if(i < nfp-1)
+				funString += c[i] + "*x<sub>" + (i+1) +"</sub> + ";
+			else
+				funString += c[i] + "*x<sub>" + (i+1) +"</sub><br>";
+		}
+
+		$("#problema").append(funString);
 
 		simplex(a, b, c, cr, base, n, nr, nfp);
 	});
