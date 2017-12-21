@@ -1,5 +1,5 @@
 function simplex(a, b, c, cr, base, n, nr, nfp) {
-	var jMaisNegativo, iMenorPositivo, fim = false, ba = [];
+	var jMaisNegativo, iMenorPositivo, fim = false, ba = [], x = [];
 
 	while(true){
 
@@ -53,6 +53,15 @@ function simplex(a, b, c, cr, base, n, nr, nfp) {
 			}
 		}
 	}
+
+	for(var i = 0; i<nr; i++)
+		x[base[i]] = b[i];
+
+
+	for(var i = 0; i<nfp; i++)
+		x[i] = base.includes(i) ? x[i] : 0;
+
+	return x;
 }
 
 function mostraIteracao(a, b, base, ba, c, cr, nr){
@@ -106,6 +115,4 @@ function mostraIteracao(a, b, base, ba, c, cr, nr){
 	$table.append($tbody);
 
 	$("#iteracoes").append($table);
-
-	console.log(a);
 }

@@ -10,10 +10,10 @@
   <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
 
   <script src="../js/jquery.min.js"></script>
-  <script type="text/javascript" src="../js/math.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <script type="text/javascript" src="js/metodos.js"></script>
   <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   	<div class="container-fluid bg-1 text-center">
   		<h1 class="margin">Simplex</h1>
@@ -64,7 +64,10 @@
         <button id ="calcula" class="btn btn-primary">Calcular</button>
   		</div>
 
-      <div class="row" id="problema"></div>
+      <div class="row border-bot" id="hint-solucao" hidden="true"><h3>Solução: </h3></div>
+      <div class="row">
+        <div class="col-sm-12" id="problema"></div>
+      </div>
   		<div class="row" id="iteracoes"></div>
   		
   	</div>

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var a = [], b = [], c = [], cr = [], base = [], n = 2, nr = 2, nfp, maiorCusto = 0;
+	var a = [], b = [], c = [], cr = [], base = [], n = 2, nr = 2, nfp, maiorCusto = 0, artificais = [], artIndex = 0;
 
 	$("input").val(0);
 	$("#n").val(2);
@@ -91,12 +91,14 @@ $(document).ready(function() {
 			}else if(s == "equal"){
 				base[i] = nfp;
 				a[i][nfp] = 1;
+				artificais[artIndex++] = nfp;
 				c[nfp++] = maiorCusto*10;
 			}else if(s == "ge"){
 				base[i] = nfp+1;
 				a[i][nfp] = -1;
 				c[nfp++] = 0;
 				a[i][nfp] = 1;
+				artificais[artIndex++] = nfp;
 				c[nfp++] = maiorCusto*10;
 			}
 		}
@@ -111,20 +113,42 @@ $(document).ready(function() {
 		for(var i=0; i<c.length; i++)
 			cr[i] = c[i];
 
-		var funString = "";
+		var funString = "`";
 
 		funString += $("#tipo").val() == "min" ? "min z=" : "max -z= ";
 
 		for(var i = 0; i<nfp; i++){
 			if(i < nfp-1)
-				funString += c[i] + "*x<sub>" + (i+1) +"</sub> + ";
+				funString += c[i] + "x_" + (i+1) +" + ";
 			else
-				funString += c[i] + "*x<sub>" + (i+1) +"</sub><br>";
+				funString += c[i] + "x_" + (i+1) +"`<br>";
 		}
 
 		$("#problema").append(funString);
+		$("#problema").append("&nbsp;&nbsp;`s.a:` ");
 
-		simplex(a, b, c, cr, base, n, nr, nfp);
+
+
+		for(var i=0; i<nr; i++){
+			funString = i == 0 ? "`" : "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`";
+
+			for(var j = 0; j<nfp; j++){
+				if(j < nfp-1)
+					funString += a[i][j] + "x_" + (j+1) + " + ";
+				else
+					funString += a[i][j] + "x_" + (j+1) + " = " + b[i] + "`<br>";
+			}
+			$("#problema").append(funString);
+		}
+
+		$("#hint-solucao").show();
+
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
+		
+
+		var x = simplex(a, b, c, cr, base, n, nr, nfp);
+
+		console.log(x);
 	});
 
 
