@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var a = [], b = [], c = [], cr = [], base = [], n = 2, nr = 2, nfp, maiorCusto = 0, artificais = [], artIndex = 0;
+	var a = [], b = [], c = [], cr = [], base = [], n = 2, nr = 2, nfp, maiorCusto = 0, artificais = [];
 
 	$("input").val(0);
 	$("#n").val(2);
@@ -47,14 +47,13 @@ $(document).ready(function() {
 			var $div = $("<div></div>");
 			for(var j = 0; j<n; j++){
 				if(j < n - 1)
-					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> +');
+					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> + ');
 				else
-					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub>');
-				console.log("ue");
+					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub> ');
 			}
 
-			$div.append('<select name="s' +i+ '"><option value="le">&le;</option><option value="equal">=</option><option value="ge">&ge;</option></select>');
-			$div.append('<input type="text" class="vals" name="b'+i+'">');
+			$div.append(' <select name="s' +i+ '"><option value="le">&le;</option><option value="equal">=</option><option value="ge">&ge;</option></select> ');
+			$div.append(' <input type="text" class="vals" name="b'+i+'">');
 
 			$("#restricoes").append($div);
 		}
@@ -92,14 +91,14 @@ $(document).ready(function() {
 			}else if(s == "equal"){
 				base[i] = nfp;
 				a[i][nfp] = 1;
-				artificais[artIndex++] = nfp;
+				artificais.push(nfp);
 				c[nfp++] = maiorCusto*10;
 			}else if(s == "ge"){
 				base[i] = nfp+1;
 				a[i][nfp] = -1;
 				c[nfp++] = 0;
 				a[i][nfp] = 1;
-				artificais[artIndex++] = nfp;
+				artificais.push(nfp);
 				c[nfp++] = maiorCusto*10;
 			}
 		}
@@ -111,12 +110,9 @@ $(document).ready(function() {
 			}
 		}
 
-		for(var i=0; i<c.length; i++)
-			cr[i] = c[i];
-
 		var funString = "`";
 
-		funString += $("#tipo").val() == "min" ? "min z=" : "max -z= ";
+		funString += $("#tipo").val() == "min" ? "min z=" : "min -z= ";
 
 		for(var i = 0; i<nfp; i++){
 			if(i < nfp-1)
@@ -146,15 +142,17 @@ $(document).ready(function() {
 
 		$("#hint-solucao").show();
 
-		var x = simplex(a, b, c, cr, base, n, nr, nfp);
+		var x = simplexDuasFases(a, b, c, base, artificais);
 
-		for(var i = 0; i< n; i++){
-			$("#solucao").append("`x_" + (i+1) + " = " + x[i] + "`<br>");
-		}
+		if(x != null)
+			for(var i = 0; i< n; i++){
+				$("#solucao").append("`x_" + (i+1) + " = " + x[i] + "`<br>");
+			}
+		else
+			$("#solucao").append("Solução vazia. <br>");
 
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 
-		console.log(x);
 	});
 
 
