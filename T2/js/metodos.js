@@ -78,7 +78,7 @@ function simplex(a, b, c, base, artificiais, segundaFase) {
 			}
 		}
 
-		mostraIteracao(a, b, base, ba, c, cr, nr);
+		mostraIteracao(a, b, base, ba, c, cr, iMenorPositivo, jMaisNegativo);
 
 		if(maisNegativo >= 0){
 			for(var i = 0; i < artificiais.length; i++){
@@ -139,7 +139,9 @@ function simplex(a, b, c, base, artificiais, segundaFase) {
 	return x;
 }
 
-function mostraIteracao(a, b, base, ba, c, cr, nr){
+function mostraIteracao(a, b, base, ba, c, cr, pivoi, pivoj){
+
+	var nr = a.length;
 
 
 	var $table = $('<table class="table table-sm"></table>');
@@ -163,8 +165,12 @@ function mostraIteracao(a, b, base, ba, c, cr, nr){
 		for(var j = 0; j<c.length + 3; j++){
 			if(j == 0)
 				$row.append('<th>`x_' + (base[i] + 1) + '`</th>');
-			else if(j > 0 && j<c.length + 1)
-				$row.append('<td>'+ Math.round(a[i][j-1]*1000)/1000 +'</td>');
+			else if(j > 0 && j<c.length + 1){
+				if(i == pivoi && j-1 == pivoj)
+					$row.append('<td class="pivo">'+ Math.round(a[i][j-1]*1000)/1000 +'</td>');
+				else
+					$row.append('<td>'+ Math.round(a[i][j-1]*1000)/1000 +'</td>');
+			}
 			else if(j == c.length + 1)
 				$row.append('<td>'+ Math.round(b[i]*1000)/1000 +'</td>');
 			else if(j == c.length + 2){

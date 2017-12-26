@@ -1,14 +1,64 @@
-function simplex(a, b, c, base, artificiais) {
-	var jMaisNegativo = 0, iMenorPositivo = 0, fim = false, ba = [], x = [], cr = [], nr, nfp;
+function gomory(a, b, c, base, artificiais, inteiros, maiorCusto){
+
+	var x = simplex(a, b, c, base, artificiais, false), naoInteiro = -1, linha = 0, it = 0;
+
+	while((naoInteiro = naoInteiros(x, inteiros)) >= 0 && it < 15){
+		var s = [];
+
+		for(var i = 0; i < base.length; i++)
+			if(base[i] == naoInteiro)
+				linha = i;
+
+		for(var j = 0, n = a[linha].length; j < n; j++)
+			s[j] = a[linha][j] - Math.floor(a[linha][j]);
+
+		s.push(-1);
+		s.push(1);
+
+		base.push(s.length-1);
+		artificiais.push(s.length-1);
+
+		for(var i = 0; i<a.length; i++)
+			for(var j = 0; j <2; j++)
+				a[i].push(0);
+
+
+		a.push(s);
+
+		b.push(b[linha] - Math.floor(b[linha]));
+
+		c.push(0);
+		c.push(maiorCusto*10);
+
+		x = simplex(a, b, c, base, artificiais, true);
+
+		it++;
+	}
+
+	return x;
+
+}
+
+function simplex(a, b, c, base, artificiais, gomory) {
+	var jMaisNegativo = 0, iMenorPositivo = 0, fim = false, ba = [], x = [], cr = [], nr, nfp, it = 0;
 
 	nr = a.length;
 	nfp = a[0].length;
 
-	for(var i=0; i<c.length; i++)
-		cr[i] = c[i];
+	if(gomory){
+		for(var j = 0; j<nfp; j++){
+			cr[j] = c[j];
+			for(var i = 0; i<nr; i++){
+				cr[j] -= c[base[i]]*a[i][j];
+			}
+		}
+	}
+	else{
+		for(var i=0; i<c.length; i++)
+			cr[i] = c[i];
+	}
 
-	while(true){
-
+	while(it < 15){
 		var maisNegativo = 0;
 		for(var i = 0; i<nfp; i++){
 			if(cr[i] < maisNegativo){
@@ -76,6 +126,7 @@ function simplex(a, b, c, base, artificiais) {
 				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
+		it++;
 	}
 
 	for(var i = 0; i<nr; i++)
@@ -145,4 +196,17 @@ function mostraIteracao(a, b, base, ba, c, cr, pivoi, pivoj){
 	$table.append($tbody);
 
 	$("#iteracoes").append($table);
+}
+
+function naoInteiros(x, inteiros){
+
+	console.log(x);
+	for(var i = x.length - 1; i >= 0; i--){
+		if(inteiros.includes(i)){
+			if(x[i] - Math.floor(x[i]) > 1e-7){
+				return i;
+			}
+		}
+	}
+	return -1;
 }

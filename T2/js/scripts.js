@@ -155,7 +155,7 @@ $(document).ready(function() {
 			$("#solucao").append("<h3 class='text-center'>Folgas: </h3>");
 			for(var i = n; i<nfp; i++){
 				if(!artificais.includes(i))
-					$("#solucao").append("<h4 class='text-center'>`r_" + (i+1-n) + " = " + x[i] + "`</h4>");
+					$("#solucao").append("<h4 class='text-center'>`r_" + (i+1) + " = " + x[i] + "`</h4>");
 			}
 		}
 		else

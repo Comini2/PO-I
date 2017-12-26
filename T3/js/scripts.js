@@ -50,6 +50,7 @@ $(document).ready(function() {
 					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> +');
 				else
 					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub>');
+				console.log("ue");
 			}
 
 			$div.append('<select name="s' +i+ '"><option value="le">&le;</option><option value="equal">=</option><option value="ge">&ge;</option></select>');
@@ -114,7 +115,7 @@ $(document).ready(function() {
 
 		var funString = "`";
 
-		funString += $("#tipo").val() == "min" ? "min z=" : "min -z= ";
+		funString += $("#tipo").val() == "min" ? "min z=" : "max -z= ";
 
 		for(var i = 0; i<nfp; i++){
 			if(i < nfp-1)
@@ -144,7 +145,7 @@ $(document).ready(function() {
 
 		$("#hint-solucao").show();
 
-		var x = simplex(a, b, c,base,artificais);
+		var x = gomory(a, b, c,base,artificais, [0,1], maiorCusto);
 
 		if(x != null){
 			$("#solucao").append("<h3 class='text-center'>Solução ótima: </h3>");

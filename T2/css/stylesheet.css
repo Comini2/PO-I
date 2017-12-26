@@ -22,20 +22,13 @@ html{
   padding-left: 15px;
 }
 
-.container .text-muted {
-  margin: 17px 0 0 0;
-  font-size: 18px;
-  text-align: center;
-  font-family: 'Oswald', sans-serif;
+h1 {
+  font-size: 48px;
 }
 
-.arrow{
-  float: right;
-}
-
-h6{
-  color: red;
-  display: none;
+.pivo{
+  background-color: #ff8566;
+  border-radius: 10px;
 }
 
 p {

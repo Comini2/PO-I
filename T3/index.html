@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Pesquisa Operacional I</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/metodos.js"></script>
+  <script type="text/javascript" src="js/scripts.js"></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+  	<div class="container-fluid bg-1 text-center">
+  		<h1 class="margin">Algoritmo de Gomory</h1>
+  	</div>
+
+  	<div class="container">
+      <div class="row border-bot">
+          <h3>Problema:</h3>          
+      </div>
+  		<div class="row">
+  			<div class="col-sm-3" id="ordem">
+  				<label for="tipo">Função: </label>
+  				<select id="tipo">
+  					<option value="min">Minimização</option>
+  					<option value="max">Maximização</option>
+	  			</select><br>
+  				<label for="n">Nº de varáveis:</label>
+		  		<input type="text" id="n" class="vals" value="2"><br>
+		  		<label for="nr">Nº de restrições:</label>
+		  		<input type="text" id="nr" class="vals" value="2">
+  			</div>
+  			<div class="col-sm-9">
+  				<div id="funcao">
+  					z = <input type="text" class="vals" name="f0"> .x<sub>1</sub> + <input type="text" class="vals" name="f1"> .x<sub>2</sub>
+	  			</div>
+	  			<div id="restricoes">
+	  				<label>Sujeito a: </label>
+	  				<div>
+	  					<input type="text" class="vals" name="a00"> .x<sub>1</sub> + <input type="text" class="vals" name="a01"> .x<sub>2</sub>
+	  					<select name="s0">
+	  						<option value="le">&le;</option>
+	  						<option value="equal">=</option>
+	  						<option value="ge">&ge;</option>
+	  					</select>
+	  					<input type="text" class="vals" name="b0">
+	  				</div>
+	  				<div>
+	  					<input type="text" class="vals" name="a10"> .x<sub>1</sub> + <input type="text" class="vals" name="a11"> .x<sub>2</sub>
+	  					<select name="s1">
+	  						<option value="le">&le;</option>
+	  						<option value="equal">=</option>
+	  						<option value="ge">&ge;</option>
+	  					</select>
+	  					<input type="text" class="vals" name="b1">
+	  				</div>
+	  			</div>
+  			</div>	
+        <button id ="calcula" class="btn btn-primary">Calcular</button>
+  		</div>
+
+      <div class="row border-bot" id="hint-solucao" hidden="true"><h3>Solução: </h3></div>
+      <div>
+        <div class="row">
+          <div class="col-sm-12" id="problema"></div>
+        </div>
+        <div id="solucao"></div>
+        <div class="row" id="iteracoes"></div>
+      </div>
+      
+  		
+  	</div>
+
+<footer class="footer">
+<div class="container">
+  <p class="text-muted">Projetado e desenvolvido por <a href="../info.html">Jo&#227;o Comini</a>.</p>     
+</div>
+</footer>
+
+</body>
+</html>
