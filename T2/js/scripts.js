@@ -144,12 +144,22 @@ $(document).ready(function() {
 
 		var x = simplexDuasFases(a, b, c, base, artificais);
 
-		if(x != null)
+		$("#iteracoes").append('<h3 class="text-center">Fim da segunda fase.</h3>');
+
+
+		if(x != null){
+			$("#solucao").append("<h3 class='text-center'>Solução ótima: </h3>");
 			for(var i = 0; i< n; i++){
-				$("#solucao").append("`x_" + (i+1) + " = " + x[i] + "`<br>");
+				$("#solucao").append("<h4 class='text-center'>`x_" + (i+1) + " = " + x[i] + "`</h4>");
 			}
+			$("#solucao").append("<h3 class='text-center'>Folgas: </h3>");
+			for(var i = n; i<nfp; i++){
+				if(!artificais.includes(i))
+					$("#solucao").append("<h4 class='text-center'>`r_" + (i+1-n) + " = " + x[i] + "`</h4>");
+			}
+		}
 		else
-			$("#solucao").append("Solução vazia. <br>");
+			$("#solucao").append("<h3>Solução vazia.</h3>");
 
 		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 

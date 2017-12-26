@@ -25,6 +25,8 @@ function simplexDuasFases(a, b, c, base, artificiais){
 		}
 	}
 
+	$("#iteracoes").append('<h3 class="text-center">Fim da primeira fase.</h3>');
+
 
 	return simplex(a, b, c, base, artificiais, true);
 }
