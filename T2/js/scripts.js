@@ -18,14 +18,16 @@ $(document).ready(function() {
 
 		$("#funcao").empty();
 
-		$("#funcao").append("z = ");
+		$("#funcao").append("`z = `");
 
 		for(i = 0; i<n; i++){
 			if(i < n-1)
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub> +');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">`x_' + (i+1) + ' +`');
 			else
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub>');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">`x_' + (i+1) + '`');
 		}
+
+		$("#nr").trigger("change");
 	});
 
 	$("#nr").change(function(){
@@ -47,9 +49,9 @@ $(document).ready(function() {
 			var $div = $("<div></div>");
 			for(var j = 0; j<n; j++){
 				if(j < n - 1)
-					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> + ');
+					$div.append('<input type="text" class="vals" name="a'+ i + j +'">`x_'+ (j+1) +' +`');
 				else
-					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub> ');
+					$div.append('<input type="text" class="vals" name="a' + i + j +'">`x_'+ (j+1) +'`');
 			}
 
 			$div.append(' <select name="s' +i+ '"><option value="le">&le;</option><option value="equal">=</option><option value="ge">&ge;</option></select> ');
@@ -57,6 +59,8 @@ $(document).ready(function() {
 
 			$("#restricoes").append($div);
 		}
+
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 	});
 
 	$("#calcula").click(function(){

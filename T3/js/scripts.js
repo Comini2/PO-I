@@ -18,14 +18,25 @@ $(document).ready(function() {
 
 		$("#funcao").empty();
 
-		$("#funcao").append("z = ");
+		$("#funcao").append("`z = `");
 
 		for(i = 0; i<n; i++){
 			if(i < n-1)
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub> +');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">`x_' + (i+1) + ' +`');
 			else
-				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">.x<sub>' + (i+1) + '</sub>');
+				$("#funcao").append('<input type="text" class="vals" name="f' + i + '">`x_' + (i+1) + '`');
 		}
+
+		$("#inteiros").empty();
+
+		$("#inteiros").append("<h3>Variáveis inteiras: </h3>");
+
+		for(i = 0; i<n; i++){
+			$("#inteiros").append('<input type="checkbox" name="i' + i + '">`x_' + (i+1) + '`')
+		}
+
+		$("#nr").trigger("change");
+
 	});
 
 	$("#nr").change(function(){
@@ -41,16 +52,15 @@ $(document).ready(function() {
 
 		$("#restricoes").empty();
 
-		$("#restricoes").append("<label>Restrições: </label>");
+		$("#restricoes").append("<h3>Restrições: </h3>");
 
 		for(var i =0; i<nr; i++){
 			var $div = $("<div></div>");
 			for(var j = 0; j<n; j++){
 				if(j < n - 1)
-					$div.append('<input type="text" class="vals" name="a'+ i + j +'">.x<sub>'+ (j+1) +'</sub> +');
+					$div.append('<input type="text" class="vals" name="a'+ i + j +'">`x_'+ (j+1) +' +`');
 				else
-					$div.append('<input type="text" class="vals" name="a' + i + j +'">.x<sub>'+ (j+1) +'</sub>');
-				console.log("ue");
+					$div.append('<input type="text" class="vals" name="a' + i + j +'">`x_'+ (j+1) +'`');
 			}
 
 			$div.append('<select name="s' +i+ '"><option value="le">&le;</option><option value="equal">=</option><option value="ge">&ge;</option></select>');
@@ -58,11 +68,13 @@ $(document).ready(function() {
 
 			$("#restricoes").append($div);
 		}
+
+		MathJax.Hub.Queue(["Typeset",MathJax.Hub]);
 	});
 
 	$("#calcula").click(function(){
 		
-		var a = [], b = [], c = [], base = [], maiorCusto = 0, artificais = [], artIndex = 0;
+		var a = [], b = [], c = [], base = [], maiorCusto = 0, artificais = [], artIndex = 0, inteiros = [];
 
 		$("#iteracoes").empty();
 		$("#problema").empty();
@@ -70,6 +82,13 @@ $(document).ready(function() {
 
 		nfp = n;
 		nr = parseInt($("#nr").val());
+
+		for(var i = 0; i<n; i++)
+			if($('input[name="i'+ i + '"]').is(':checked'))
+				inteiros.push(i);
+
+		if(inteiros.length == 0)
+			return;
 
 		var fp = $("#tipo").val() == "min" ? 1 : -1;
 
@@ -145,7 +164,9 @@ $(document).ready(function() {
 
 		$("#hint-solucao").show();
 
-		var x = gomory(a, b, c,base,artificais, [0,1], maiorCusto);
+		
+
+		var x = gomory(a, b, c,base,artificais, inteiros, maiorCusto);
 
 		if(x != null){
 			$("#solucao").append("<h3 class='text-center'>Solução ótima: </h3>");

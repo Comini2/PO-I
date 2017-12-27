@@ -16,7 +16,8 @@
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
   	<div class="container-fluid bg-1 text-center">
-  		<h1 class="margin">Algoritmo de Cortes de Gomory</h1>
+  		<h1 class="margin">Bifurcação e Limite</h1>
+      <p><i>Branch and Bound</i></p>
   	</div>
 
   	<div class="container">
@@ -37,29 +38,29 @@
   			</div>
   			<div class="col-sm-9">
   				<div id="funcao">
-  					`z = `<input type="text" class="vals" name="f0"> `x_1 +` <input type="text" class="vals" name="f1"> `x_2`
-	  			</div>
-	  			<div id="restricoes">
-	  				<h3>Sujeito a: </h3>
-	  				<div>
-	  					<input type="text" class="vals" name="a00"> `x_2 +` <input type="text" class="vals" name="a01"> `x_2`
-	  					<select name="s0">
-	  						<option value="le">&le;</option>
-	  						<option value="equal">=</option>
-	  						<option value="ge">&ge;</option>
-	  					</select>
-	  					<input type="text" class="vals" name="b0">
-	  				</div>
-	  				<div>
-	  					<input type="text" class="vals" name="a10"> `x_1 +` <input type="text" class="vals" name="a11"> `x_2`
-	  					<select name="s1">
-	  						<option value="le">&le;</option>
-	  						<option value="equal">=</option>
-	  						<option value="ge">&ge;</option>
-	  					</select>
-	  					<input type="text" class="vals" name="b1">
-	  				</div>
-	  			</div>
+            `z = `<input type="text" class="vals" name="f0"> `x_1 +` <input type="text" class="vals" name="f1"> `x_2`
+          </div>
+          <div id="restricoes">
+            <h3>Sujeito a: </h3>
+            <div>
+              <input type="text" class="vals" name="a00"> `x_2 +` <input type="text" class="vals" name="a01"> `x_2`
+              <select name="s0">
+                <option value="le">&le;</option>
+                <option value="equal">=</option>
+                <option value="ge">&ge;</option>
+              </select>
+              <input type="text" class="vals" name="b0">
+            </div>
+            <div>
+              <input type="text" class="vals" name="a10"> `x_1 +` <input type="text" class="vals" name="a11"> `x_2`
+              <select name="s1">
+                <option value="le">&le;</option>
+                <option value="equal">=</option>
+                <option value="ge">&ge;</option>
+              </select>
+              <input type="text" class="vals" name="b1">
+            </div>
+          </div>
           <div id="inteiros">
             <h3>Variáveis inteiras: </h3>
             <input type="checkbox" name="i0">`x_1`
