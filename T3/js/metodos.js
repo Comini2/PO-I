@@ -1,6 +1,6 @@
 function gomory(a, b, c, base, artificiais, inteiros, maiorCusto){
 
-	var x = simplex(a, b, c, base, artificiais, false), naoInteiro = -1, linha = 0, it = 0;
+	var x = simplex(a, b, c, base, artificiais), naoInteiro = -1, linha = 0, it = 0;
 
 	while((naoInteiro = naoInteiros(x, inteiros)) >= 0 && it < 15){
 		var s = [];
@@ -30,7 +30,7 @@ function gomory(a, b, c, base, artificiais, inteiros, maiorCusto){
 		c.push(0);
 		c.push(maiorCusto*10);
 
-		x = simplex(a, b, c, base, artificiais, true);
+		x = simplex(a, b, c, base, artificiais);
 
 		it++;
 	}
@@ -39,26 +39,21 @@ function gomory(a, b, c, base, artificiais, inteiros, maiorCusto){
 
 }
 
-function simplex(a, b, c, base, artificiais, gomory) {
+function simplex(a, b, c, base, artificiais) {
 	var jMaisNegativo = 0, iMenorPositivo = 0, fim = false, ba = [], x = [], cr = [], nr, nfp, it = 0;
 
 	nr = a.length;
 	nfp = a[0].length;
 
-	if(gomory){
+	while(it < 15){
+
 		for(var j = 0; j<nfp; j++){
 			cr[j] = c[j];
 			for(var i = 0; i<nr; i++){
 				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
-	}
-	else{
-		for(var i=0; i<c.length; i++)
-			cr[i] = c[i];
-	}
 
-	while(it < 15){
 		var maisNegativo = 0;
 		for(var i = 0; i<nfp; i++){
 			if(cr[i] < maisNegativo){
@@ -117,13 +112,6 @@ function simplex(a, b, c, base, artificiais, gomory) {
 					a[i][j] -= m*a[iMenorPositivo][j];
 				}
 				b[i] -= m*b[iMenorPositivo];
-			}
-		}
-		
-		for(var j = 0; j<nfp; j++){
-			cr[j] = c[j];
-			for(var i = 0; i<nr; i++){
-				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
 		it++;

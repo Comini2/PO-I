@@ -4,10 +4,14 @@ function simplex(a, b, c, base, artificiais) {
 	nr = a.length;
 	nfp = a[0].length;
 
-	for(var i=0; i<c.length; i++)
-		cr[i] = c[i];
-
 	while(true){
+
+		for(var j = 0; j<nfp; j++){
+			cr[j] = c[j];
+			for(var i = 0; i<nr; i++){
+				cr[j] -= c[base[i]]*a[i][j];
+			}
+		}
 
 		var maisNegativo = 0;
 		for(var i = 0; i<nfp; i++){
@@ -67,13 +71,6 @@ function simplex(a, b, c, base, artificiais) {
 					a[i][j] -= m*a[iMenorPositivo][j];
 				}
 				b[i] -= m*b[iMenorPositivo];
-			}
-		}
-		
-		for(var j = 0; j<nfp; j++){
-			cr[j] = c[j];
-			for(var i = 0; i<nr; i++){
-				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
 	}

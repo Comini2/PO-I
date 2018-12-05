@@ -6,7 +6,7 @@ function simplexDuasFases(a, b, c, base, artificiais){
 		for(var i = 0; i < c.length; i++)
 			ca[i] = artificiais.includes(i) ? 1 : 0;
 
-		simplex(a, b, ca, base, artificiais, false);
+		simplex(a, b, ca, base, artificiais);
 
 		for(var i = 0; i < base.length; i++){
 			if(artificiais.includes(base[i]) && b[i] == 0){
@@ -16,11 +16,12 @@ function simplexDuasFases(a, b, c, base, artificiais){
 			}
 		}
  
-		for(var i = 0; i<a.length; i++)
-			for(var j = 0; j<artificiais.length; j++)
+		for(var i = 0; i<a.length; i++){
+			for(var j = artificiais.length - 1; j >= 0; j--)
 					a[i].splice(artificiais[j], 1);
+		}
 
-		for(var i = 0; i<artificiais.length; i++){
+		for(var i = artificiais.length - 1; i >= 0; i--){
 			c.splice(artificiais[i], 1);
 		}
 	}
@@ -28,37 +29,24 @@ function simplexDuasFases(a, b, c, base, artificiais){
 	$("#iteracoes").append('<h3 class="text-center">Fim da primeira fase.</h3>');
 
 
-	return simplex(a, b, c, base, artificiais, true);
+	return simplex(a, b, c, base, artificiais);
 }
 
-function simplex(a, b, c, base, artificiais, segundaFase) {
+function simplex(a, b, c, base, artificiais) {
 	var jMaisNegativo = 0, iMenorPositivo = 0, cr = [], ba = [], x = [], nfp, nr;
 
 	nr = a.length;
 	nfp = a[0].length;
 
-	for(var i=0; i<c.length; i++)
-		cr[i] = c[i];
 
-	if(segundaFase){
+	while(true){
+
 		for(var j = 0; j<nfp; j++){
 			cr[j] = c[j];
 			for(var i = 0; i<nr; i++){
 				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
-	}else{
-		for(var i = 0; i < artificiais.length; i++){
-			for(var j = 0; j < base.length; j++){
-				if(base[j] == artificiais[i]){
-					for(var k = 0; k < cr.length; k++)
-						cr[k] -= a[j][k];
-				}
-			}
-		}
-	}
-
-	while(true){
 
 		var maisNegativo = 0;
 		for(var i = 0; i<nfp; i++){
@@ -118,13 +106,6 @@ function simplex(a, b, c, base, artificiais, segundaFase) {
 					a[i][j] -= m*a[iMenorPositivo][j];
 				}
 				b[i] -= m*b[iMenorPositivo];
-			}
-		}
-		
-		for(var j = 0; j<nfp; j++){
-			cr[j] = c[j];
-			for(var i = 0; i<nr; i++){
-				cr[j] -= c[base[i]]*a[i][j];
 			}
 		}
 	}
